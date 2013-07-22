@@ -1,8 +1,10 @@
-"""
+--[[
 Count Vowels - Enter a string and the program counts
 the number of vowels in the text. For added complexity
 have it report a sum of each vowel found.
-"""
+]]
+
+--[[ Python solution
 
 string = raw_input('Enter a string: ').lower()
 
@@ -15,3 +17,6 @@ for vowel in counts:
             counts[vowel] += 1
 
 print counts
+]]
+
+print("Do stuff.")
