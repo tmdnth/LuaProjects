@@ -3,10 +3,14 @@ Reverse a String – Enter a string and the program
 will reverse it and print it out.
 ]]
 
---[[ Python Solution
+print("Enter string to reverse:")
+string = io.read()
 
-string = raw_input("Whatchu wanna say to me? ")
-print "You say %s, I say %s" % (string, string[::-1])
-]]
+-- Too easy
+-- print("Backwards, that reads:\n" .. string.reverse(string))
+rev = ""
+for i = 1, string.len(string) do
+    rev = rev .. string.sub(string, -i, -i)
+end
 
-print("Do stuff")
+print("Backwards, that reads:\n" .. rev)

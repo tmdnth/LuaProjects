@@ -4,14 +4,10 @@ by the user is a palindrome. That is that it reads
 the same forwards as backwards like "racecar"
 ]]
 
---[[ Python Solution
+print("Enter suspected palindrome:")
+string = io.read()
 
-string = raw_input('Enter a string: ').lower()
+-- Fuck reversing the string manually again
+if(string == string.reverse(string)) then result = " " else result = " not " end
 
-if string == string[::-1]:
-    print '%s is a palindrome' % string
-else:
-    print '%s is not a palindrome' % string
-]]
-
-print("Do stuff.")
+print("That's" .. result .. "a palindrome!")
