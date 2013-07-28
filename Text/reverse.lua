@@ -10,7 +10,7 @@ string = io.read()
 -- print("Backwards, that reads:\n" .. string.reverse(string))
 rev = ""
 for i = 1, string.len(string) do
-    rev = rev .. string.sub(string, -i, -i)
+	rev = rev .. string.sub(string, -i, -i)
 end
 
 print("Backwards, that reads:\n" .. rev)

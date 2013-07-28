@@ -12,9 +12,9 @@ vowels = ['a', 'e', 'i', 'o', 'u']
 counts = dict(zip(vowels, [0, 0, 0, 0, 0]))
 
 for vowel in counts:
-    for char in string:
-        if vowel == char:
-            counts[vowel] += 1
+	for char in string:
+		if vowel == char:
+			counts[vowel] += 1
 
 print counts
 ]]
