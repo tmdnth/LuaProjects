@@ -9,9 +9,18 @@ Matrix.__index = Matrix
 setmetatable(Matrix, { __call = function(_, ...) return Matrix.new(...) end })
 
 function Matrix.new(...)
-	if select("#", ...) == 1 then
+	if select("#", ...) == 1 and type(select(1, ...)) == "number" then
 		ret = Matrix.new(select(1, ...), select(1, ...), 0)
 		for i = 1, select(1, ...) do ret.mat[i][i] = 1 end
+		return ret
+	elseif select("#", ...) == 1 and type(select(1, ...)) == "table" then
+		oldMat = select(1, ...)
+		ret = Matrix(oldMat.width, oldMat.height, 0)
+		for i = 1, oldMat.width do
+			for j = 1, oldMat.height do
+				ret.mat[i][j] = oldMat.mat[i][j]
+			end
+		end
 		return ret
 	elseif select("#", ...) == 3 then
 		ret = setmetatable({ width = select(1, ...), height = select(2, ...), mat = {} }, Matrix)
@@ -23,7 +32,6 @@ function Matrix.new(...)
 			table.insert(ret.mat, col)
 		end
 		return ret
-	-- elseif 
 	else
 		return setmetatable({ width = 0 , height = 0}, Matrix)
 	end
@@ -44,44 +52,49 @@ end
 
 function Matrix.__add(a, b)
 	if type(a) == "number" then
+		ret = Matrix(b)
 		for i = 1, b.width do
 			for j = 1, b.height do
-				b.mat[i][j] = b.mat[i][j] + a
+				ret.mat[i][j] = b.mat[i][j] + a
 			end
 		end
-		return b
+		return ret
 	elseif type(b) == "number" then
+		ret = Matrix(a)
 		for i = 1, a.width do
 			for j = 1, a.height do
-				a.mat[i][j] = a.mat[i][j] + b
+				ret.mat[i][j] = a.mat[i][j] + b
 			end
 		end
-		return a
+		return ret
 	elseif a.height == b.height and a.width == b.width then
+		ret = Matrix(b)
 		for i = 1, b.width do
 			for j = 1, b.height do
-				b.mat[i][j] = b.mat[i][j] + a.mat[i][j]
+				ret.mat[i][j] = b.mat[i][j] + a.mat[i][j]
 			end
 		end
-		return b
+		return ret
 	else return nil	end
 end
 
 function Matrix.__mul(a, b)
 	if type(a) == "number" then
+		ret = Matrix(b)
 		for i = 1, b.width do
 			for j = 1, b.height do
-				b.mat[i][j] = b.mat[i][j] * a
+				ret.mat[i][j] = b.mat[i][j] * a
 			end
 		end
-		return b
+		return ret
 	elseif type(b) == "number" then
+		ret = Matrix(a)
 		for i = 1, a.width do
 			for j = 1, a.height do
-				a.mat[i][j] = a.mat[i][j] * b
+				ret.mat[i][j] = a.mat[i][j] * b
 			end
 		end
-		return a
+		return ret
 	elseif a.width == b.height then
 		ret = Matrix(b.width, a.height, 0)
 		for i = 1, b.width do
@@ -107,12 +120,14 @@ print("Do stuff")
 
 mat = Matrix(3)
 
-mat2 = Matrix(3)
+mat = mat + 5
 
--- FIXME:
--- Operators still manipulate the passed
--- matrices; that's unwanted behaviour
+mat = mat * 3
 
-print(mat + mat2)
+mat2 = Matrix(mat)
+
+mat = mat2 + mat2 + mat2 * mat2 + mat2 * mat2
+
+print(mat)
 print "\n"
 print(mat2)
