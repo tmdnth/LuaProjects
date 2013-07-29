@@ -116,12 +116,11 @@ function Matrix.__sub(a, b)
 	else return nil	end
 end
 
+--[[
 print("Do stuff")
 
 mat = Matrix(3)
-
 mat = mat + 5
-
 mat = mat * 3
 
 mat2 = Matrix(mat)
@@ -131,3 +130,4 @@ mat = mat2 + mat2 + mat2 * mat2 + mat2 * mat2
 print(mat)
 print "\n"
 print(mat2)
+]]

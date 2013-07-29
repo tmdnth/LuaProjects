@@ -3,8 +3,9 @@ Dijkstra’s Algorithm – Create a program that finds
 the shortest path through a graph using its edges.
 ]]
 
--- Creating a simple Graph class
-
+--------------------------
+--- Simple Graph class ---
+--------------------------
 -- Nodes is a table with boolean values for each existing node
 -- Edges are tables with start, stop, and weight
 
@@ -14,7 +15,6 @@ Graph.__index = Graph
 setmetatable(Graph, {__call = function(...)
 		return setmetatable({ nodes = {}, edges = {} }, Graph)
 	end})
-
 
 -- Graph:push(x) => push node x
 -- Graph:push({ x, y, w }) => push edge x --(w)--> y, along with nodes x, y
@@ -30,18 +30,6 @@ function Graph:push(x)
 		if not x[3] then x[3] = 1 end
 		table.insert(self.edges, { start = x[1], stop = x[2], weight = x[3] })
 	end
-end
-
-function Graph:__tostring()
-	ret = "Nodes:\n"
-	for k, v in pairs(self.nodes) do
-		if v then ret = ret .. k .. "\n" end
-	end
-	ret = ret .. "\nEdges:\n"
-	for _, v in ipairs(self.edges) do
-		ret = ret .. v.start .. "\t--(" .. v.weight .. ")-->\t" .. v.stop .."\n"
-	end
-	return ret
 end
 
 -- Graph:remove({ x, y}) => remove edge x --(w)--> y, return w or false
@@ -66,6 +54,22 @@ function Graph:remove(x)
 		end
 	end
 end
+
+function Graph:__tostring()
+	ret = "Nodes:\n"
+	for k, v in pairs(self.nodes) do
+		if v then ret = ret .. k .. "\n" end
+	end
+	ret = ret .. "\nEdges:\n"
+	for _, v in ipairs(self.edges) do
+		ret = ret .. v.start .. "\t--(" .. v.weight .. ")-->\t" .. v.stop .."\n"
+	end
+	return ret
+end
+
+--------------------------
+--- End of Graph class ---
+--------------------------
 
 -- TODO: Add Dijkstra algorithm!
 
