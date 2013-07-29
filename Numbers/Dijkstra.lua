@@ -12,7 +12,7 @@ the shortest path through a graph using its edges.
 Graph = {}
 Graph.__index = Graph
 
-setmetatable(Graph, {__call = function(...)
+setmetatable(Graph, {__call = function(_, ...)
 		return setmetatable({ nodes = {}, edges = {} }, Graph)
 	end})
 
