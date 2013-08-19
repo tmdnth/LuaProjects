@@ -15,7 +15,7 @@ fiblist = setmetatable({ [0] = 0, [1] = 1 }, { __tostring = function(t)
 end })
 ]]
 
--- A much more elegant solution, from Wikipedia (of all things)
+-- A much more elegant solution, from Wikipedia (of all places)
 fiblist = setmetatable({ 1, 1 }, { __tostring = function(t)
 		ret = ""
 		for i, v in ipairs(t) do ret = ret .. v
